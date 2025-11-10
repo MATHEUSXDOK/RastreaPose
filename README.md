@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -71,3 +72,7 @@ export default defineConfig([
   },
 ])
 ```
+=======
+# RastreaPose
+Projeto RastreaPose – Entregantes: Matheus Coelho, Caio Serpa.
+>>>>>>> 28da25fe977027774f8bc97c6d73abc641c9df1c
