@@ -1,0 +1,70 @@
+/* -------------------- AppBar -------------------- */
+.appbar {
+  width: fit-content;
+  border-radius: 8px;
+  margin: 20px auto 0 auto; /* topo e centralizado */
+  padding: 0 20px;
+}
+
+/* Centraliza o conteúdo da Toolbar */
+.toolbarContent {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+/* Links do menu */
+.navLink {
+  color: white;
+  text-decoration: none;
+}
+
+/* Hover nos botões */
+.navLink:hover {
+  text-decoration: underline;
+}
+
+/* -------------------- Pages (Home, About) -------------------- */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px; /* largura igual ou próxima ao menu */
+  margin: 10px auto 0 auto; /* centralizado horizontalmente */
+}
+
+/* Parágrafos das páginas */
+.pageContainer p {
+  margin-top: 10px;
+  font-size: 1rem;
+  text-align: justify; /* texto justificado */
+}
+
+/* -------------------- WeatherCard -------------------- */
+.weather-card {
+  min-width: 250px;
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.weather-card .city {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.weather-card .temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.weather-card .description {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
