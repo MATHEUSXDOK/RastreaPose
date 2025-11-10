@@ -2,11 +2,10 @@
 .appbar {
   width: fit-content;
   border-radius: 8px;
-  margin: 20px auto 0 auto; /* topo e centralizado */
+  margin: 20px auto 0 auto;
   padding: 0 20px;
 }
 
-/* Centraliza o conteúdo da Toolbar */
 .toolbarContent {
   display: flex;
   gap: 20px;
@@ -15,13 +14,11 @@
   min-height: 50px;
 }
 
-/* Links do menu */
 .navLink {
   color: white;
   text-decoration: none;
 }
 
-/* Hover nos botões */
 .navLink:hover {
   text-decoration: underline;
 }
@@ -31,15 +28,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px; /* largura igual ou próxima ao menu */
-  margin: 10px auto 0 auto; /* centralizado horizontalmente */
+  width: 500px; 
+  margin: 10px auto 0 auto;
 }
 
-/* Parágrafos das páginas */
 .pageContainer p {
   margin-top: 10px;
   font-size: 1rem;
-  text-align: justify; /* texto justificado */
+  text-align: justify; 
 }
 
 /* -------------------- WeatherCard -------------------- */
