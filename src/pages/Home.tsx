@@ -20,6 +20,7 @@ const Home: React.FC = () => {
         city: data.name,
         temp: data.main.temp,
         description: data.weather[0].description,
+        humidity: data.main.humidity,
       });
     } catch (err: any) {
       if (err.response && err.response.status === 404) {
@@ -53,6 +54,7 @@ const Home: React.FC = () => {
           city={weather.city}
           temp={weather.temp}
           description={weather.description}
+          humiditty={weather.humidity}
         />
       )}
     </Box>
