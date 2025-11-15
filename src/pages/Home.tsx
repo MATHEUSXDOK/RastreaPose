@@ -3,12 +3,15 @@ import { TextField, Button, Box } from "@mui/material";
 import WeatherCard from "../components/WeatherCard";
 import Loader from "../components/Loader";
 import { getWeatherByCity } from "../services/weatherService";
+import { useSearchHistory } from "../hooks/useSearchHistory";
+
 
 const Home: React.FC = () => {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const {history, addToHistory} = useSearchHistory();
 
   const handleSearch = async () => {
     if (!city) return;
@@ -22,6 +25,9 @@ const Home: React.FC = () => {
         description: data.weather[0].description,
         humidity: data.main.humidity,
       });
+      
+      addToHistory(city);
+
     } catch (err: any) {
       if (err.response && err.response.status === 404) {
         setError("Cidade não encontrada, verifique o nome e tente novamente.");
@@ -45,6 +51,18 @@ const Home: React.FC = () => {
         <Button variant="contained" onClick={handleSearch}>
           Buscar
         </Button>
+        <div className="history">
+
+          <h3>Histórico de buscas</h3>
+         <ul>
+           {history.map((item) => (
+           <li key={item}>
+             <button onClick={() => setCity(item)}>{item}</button>
+            </li>
+          ))}
+  </ul>
+</div>
+
       </Box>
 
       {loading && <Loader />}

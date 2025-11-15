@@ -78,3 +78,33 @@ body {
   background-repeat: no-repeat; 
   background-attachment: fixed; 
 }
+
+.history {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.history h3 {
+  margin-bottom: 10px;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history button {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.history button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
