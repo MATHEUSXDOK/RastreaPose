@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
 import WeatherCard from "../components/WeatherCard";
-import Loader from "../components/Loader";
 import { getWeatherByCity } from "../services/weatherService";
 import { useSearchHistory } from "../hooks/useSearchHistory";
-
 
 const Home: React.FC = () => {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const {history, addToHistory} = useSearchHistory();
+  const { history, addToHistory } = useSearchHistory();
 
   const handleSearch = async () => {
     if (!city) return;
-    setLoading(true);
     setError("");
     try {
       const data = await getWeatherByCity(city);
@@ -25,9 +20,7 @@ const Home: React.FC = () => {
         description: data.weather[0].description,
         humidity: data.main.humidity,
       });
-      
       addToHistory(city);
-
     } catch (err: any) {
       if (err.response && err.response.status === 404) {
         setError("Cidade não encontrada, verifique o nome e tente novamente.");
@@ -35,47 +28,48 @@ const Home: React.FC = () => {
         setError("Não foi possível obter o clima. Tente novamente mais tarde.");
       }
       setWeather(null);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" gap="20px">
-      <Box display="flex" gap="10px" width="100%" justifyContent="center">
-        <TextField
-          label="Digite a cidade"
+    <div className="pageContainer homeContainer">
+      <div className="searchBox">
+        <input
+          type="text"
+          placeholder="Digite a cidade"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
-        <Button variant="contained" onClick={handleSearch}>
-          Buscar
-        </Button>
-        <div className="history">
+        <button onClick={handleSearch}>Buscar</button>
+      </div>
 
-          <h3>Histórico de buscas</h3>
-         <ul>
-           {history.map((item) => (
-           <li key={item}>
-             <button onClick={() => setCity(item)}>{item}</button>
-            </li>
-          ))}
-  </ul>
-</div>
+      {error && <p className="error-message">{error}</p>}
 
-      </Box>
-
-      {loading && <Loader />}
-      {error && <p style={{ color: "red" }}>{error}</p>}
       {weather && (
         <WeatherCard
           city={weather.city}
           temp={weather.temp}
           description={weather.description}
-          humiditty={weather.humidity}
+          humidity={weather.humidity}
         />
       )}
-    </Box>
+
+      {history.length > 0 && (
+        <div className="history">
+          {history.map((item) => (
+            <button
+              key={item}
+              onClick={() => {
+                setCity(item);
+                handleSearch();
+              }}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 

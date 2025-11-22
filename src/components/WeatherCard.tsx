@@ -6,17 +6,17 @@ interface WeatherCardProps {
   city: string;
   temp: number;
   description: string;
-  humiditty: number;
+  humidity: number;
 }
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ city, temp, description, humiditty }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ city, temp, description, humidity }) => {
   return (
     <Card className="weather-card">
       <CardContent>
         <Typography className="city">{city}</Typography>
         <Typography className="temp">{temp}°C</Typography>
         <Typography className="description">{description}</Typography>
-        <Typography className="humidity">{humiditty}💧</Typography>
+        <Typography className="humidity">{humidity}💧</Typography>
       </CardContent>
     </Card>
   );
