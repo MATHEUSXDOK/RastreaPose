@@ -33,15 +33,23 @@ const Home: React.FC = () => {
 
   return (
     <div className="pageContainer homeContainer">
-      <div className="searchBox">
+
+      {/* FORM para permitir Enter */}
+      <form
+        className="searchBox"
+        onSubmit={(e) => {
+          e.preventDefault(); // evita reload
+          handleSearch();
+        }}
+      >
         <input
           type="text"
           placeholder="Digite a cidade"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
-        <button onClick={handleSearch}>Buscar</button>
-      </div>
+        <button type="submit">Buscar</button>
+      </form>
 
       {error && <p className="error-message">{error}</p>}
 
