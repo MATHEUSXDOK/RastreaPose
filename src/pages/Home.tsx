@@ -34,7 +34,6 @@ const Home: React.FC = () => {
   return (
     <div className="pageContainer homeContainer">
 
-      {/* FORM para permitir Enter */}
       <form
         className="searchBox"
         onSubmit={(e) => {
