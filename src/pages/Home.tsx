@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import WeatherCard from "../components/WeatherCard";
 import { getWeatherByCity } from "../services/weatherService";
 import { useSearchHistory } from "../hooks/useSearchHistory";
+import type { WeatherData } from "../types/WeatherData";
+import axios from "axios";
 
 const Home: React.FC = () => {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState("");
   const { history, addToHistory } = useSearchHistory();
 
   const handleSearch = async () => {
     if (!city) return;
     setError("");
+
     try {
       const data = await getWeatherByCity(city);
       setWeather({
@@ -21,11 +24,15 @@ const Home: React.FC = () => {
         humidity: data.main.humidity,
       });
       addToHistory(city);
-    } catch (err: any) {
-      if (err.response && err.response.status === 404) {
-        setError("Cidade não encontrada, verifique o nome e tente novamente.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 404) {
+          setError("Cidade não encontrada, verifique o nome e tente novamente.");
+        } else {
+          setError("Não foi possível obter o clima. Tente novamente mais tarde.");
+        }
       } else {
-        setError("Não foi possível obter o clima. Tente novamente mais tarde.");
+        setError("Erro inesperado.");
       }
       setWeather(null);
     }
@@ -33,36 +40,32 @@ const Home: React.FC = () => {
 
   return (
     <div className="pageContainer homeContainer">
-
-      <form
-        className="searchBox"
-        onSubmit={(e) => {
-          e.preventDefault(); // evita reload
-          handleSearch();
-        }}
-      >
+      <div className="searchBox">
         <input
           type="text"
           placeholder="Digite a cidade"
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
-        <button type="submit">Buscar</button>
-      </form>
+        <button onClick={handleSearch}>Buscar</button>
+      </div>
 
       {error && <p className="error-message">{error}</p>}
 
+      {/* Caixa de resultado só aparece quando há dados */}
       {weather && (
-        <WeatherCard
-          city={weather.city}
-          temp={weather.temp}
-          description={weather.description}
-          humidity={weather.humidity}
-        />
+        <div className="weather-display" style={{ width: "100%", marginTop: "15px" }}>
+          <WeatherCard
+            city={weather.city}
+            temp={weather.temp}
+            description={weather.description}
+            humidity={weather.humidity}
+          />
+        </div>
       )}
 
       {history.length > 0 && (
-        <div className="history">
+        <div className="history" style={{ marginTop: "15px" }}>
           {history.map((item) => (
             <button
               key={item}

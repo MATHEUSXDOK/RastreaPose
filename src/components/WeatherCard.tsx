@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Typography } from "@mui/material";
-import "../styles/global.css"; // importa o global.css
+import "../styles/global.css";
 
 interface WeatherCardProps {
   city: string;
