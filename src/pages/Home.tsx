@@ -52,7 +52,6 @@ const Home: React.FC = () => {
 
       {error && <p className="error-message">{error}</p>}
 
-      {/* Caixa de resultado só aparece quando há dados */}
       {weather && (
         <div className="weather-display" style={{ width: "100%", marginTop: "15px" }}>
           <WeatherCard

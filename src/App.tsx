@@ -12,7 +12,6 @@ import "./styles/global.css";
 const App: React.FC = () => {
   return (
     <Router>
-      {/* Barra de menu centralizada */}
       <div className="menuContainer">
         <AppBar
           position="static"
@@ -37,8 +36,6 @@ const App: React.FC = () => {
           </Toolbar>
         </AppBar>
       </div>
-
-      {/* Conteúdo centralizado */}
       <div className="pageWrapper">
         <Routes>
           <Route path="/" element={<Home />} />
